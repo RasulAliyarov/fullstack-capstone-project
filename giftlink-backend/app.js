@@ -5,12 +5,12 @@ const cors = require('cors');
 const pinoLogger = require('./logger');
 
 const connectToDatabase = require('./models/db');
-const {loadData} = require("./util/import-mongo/index");
+const { loadData } = require("./util/import-mongo/index");
 
 
 const app = express();
-app.use("*",cors());
-const port = 3060;
+app.use(cors());
+const port = 3070;
 
 // Connect to MongoDB; we just do this one time
 connectToDatabase().then(() => {
@@ -23,10 +23,10 @@ app.use(express.json());
 
 // Route files
 // Gift API Task 1: import the giftRoutes and store in a constant called giftroutes
-const giftRoutes  = require('./routes/giftRoutes');
+const giftRoutes = require('./routes/giftRoutes');
 
 // Search API Task 1: import the searchRoutes and store in a constant called searchRoutes
-const searchRoutes  = require('./routes/searchRoutes');
+const searchRoutes = require('./routes/searchRoutes');
 
 
 
@@ -48,7 +48,7 @@ app.use((err, req, res, next) => {
     res.status(500).send('Internal Server Error');
 });
 
-app.get("/",(req,res)=>{
+app.get("/", (req, res) => {
     res.send("Inside the server")
 })
 
