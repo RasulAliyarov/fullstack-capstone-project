@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './DetailsPage.css';
-import {urlConfig} from '../../config';
+import { urlConfig } from '../../config';
 
 function DetailsPage() {
     const navigate = useNavigate();
@@ -9,6 +9,11 @@ function DetailsPage() {
     const [gift, setGift] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    const formatDate = (timestamp) => {
+        const date = new Date(timestamp * 1000);
+        return date.toLocaleDateString('default', { month: 'long', day: 'numeric', year: 'numeric' });
+    };
 
     useEffect(() => {
         const authenticationToken = sessionStorage.getItem('auth-token');
@@ -46,6 +51,9 @@ function DetailsPage() {
         // Task 4: Handle back click
         navigate(-1);
     };
+
+
+
 
     //The comments have been hardcoded for this project.
     const comments = [
@@ -92,19 +100,19 @@ function DetailsPage() {
                         )}
                     </div>
                     {/* Task 6: Display gift details */}
-                    <p><strong>Category:</strong> 
+                    <p><strong>Category: </strong>
                         {gift.category}
                     </p>
-                    <p><strong>Condition:</strong> 
+                    <p><strong>Condition: </strong>
                         {gift.condition}
                     </p>
-                    <p><strong>Date Added:</strong> 
-                        {gift.dateAdded}
+                    <p><strong>Date Added: </strong>
+                        {formatDate(gift.date_added)}
                     </p>
-                    <p><strong>Age (Years):</strong> 
-                        {gift.age}
+                    <p><strong>Age (Years): </strong>
+                        {gift.age_years}
                     </p>
-                    <p><strong>Description:</strong> 
+                    <p><strong>Description: </strong>
                         {gift.description}
                     </p>
                 </div>
